@@ -46,15 +46,14 @@ function initializeObservers() {
   // initialize metric observers on window load...
   window.addEventListener("load", () => {
     initializeObservers();
+    // send metric data to api
+
+    // check whether sendBeacon is available
+    if (!navigator.sendBeacon) {
+      // use fetch api
+      sendMetricsWithFetch(JSON.stringify(window._perfAnalytics));
+    } else {
+      sendMetricsWithBeacon(JSON.stringify(window._perfAnalytics));
+    }
   });
-
-  // send metric data to api
-
-  // check whether sendBeacon is available
-  if (!navigator.sendBeacon) {
-    // use fetch api
-    sendMetricsWithFetch(JSON.stringify(window._perfAnalytics));
-  } else {
-    sendMetricsWithBeacon(JSON.stringify(window._perfAnalytics));
-  }
 })();
