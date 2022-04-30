@@ -27,7 +27,7 @@ export const getFcp = () => {
       for (const entry of entryList.getEntries()) {
         window._perfAnalytics.fcp = convertToSec(entry.startTime);
       }
-    }).observe({ entryTypes: ["paint", "resources"] });
+    }).observe({ entryTypes: ["paint", "resource"] });
   }
 };
 

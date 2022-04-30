@@ -43,6 +43,9 @@ function initializeObservers() {
 }
 
 (async function init() {
+  // check whether performance apis are supported
+  isPerformanceAPISupported();
+
   // initialize metric observers on window load...
   window.addEventListener("load", () => {
     initializeObservers();

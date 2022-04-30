@@ -1,6 +1,7 @@
-const BASE_URL = "http://localhost:3001/";
+const BASE_URL = "http://localhost:3001/metric-model";
 export const sendMetricsWithFetch = async (data: string): Promise<Response> => {
   return fetch(BASE_URL, {
+    mode: "no-cors",
     body: data,
     method: "POST",
     headers: {
