@@ -1,0 +1,8 @@
+.prettierrc
+
+
+node_modules
+.prettierrc.js
+# build folders
+/lib
+/dist

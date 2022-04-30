@@ -1,0 +1,33 @@
+{
+  "name": "perf-analytics-js",
+  "version": "1.0.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/esm/index.js"
+    }
+  ],
+  "scripts": {
+    "build": "tsc",
+    "size": "yarn run rollup && size-limit",
+    "rollup": "rollup -c"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.1",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@size-limit/file": "^7.0.8",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "size-limit": "^7.0.8",
+    "typescript": "^4.5.4"
+  }
+}
