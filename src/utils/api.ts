@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001/metric-model";
+const BASE_URL = "https://tarikfp-perf-analytics-api.herokuapp.com/metric-model";
 export const sendMetricsWithFetch = async (data: string): Promise<Response> => {
   return fetch(BASE_URL, {
     mode: "no-cors",
