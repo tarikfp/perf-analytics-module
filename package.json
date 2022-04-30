@@ -1,5 +1,5 @@
 {
-  "name": "perf-analytics-js",
+  "name": "@tarikfp/perf-analytics-module",
   "version": "1.0.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -13,10 +13,17 @@
       "path": "dist/esm/index.js"
     }
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "size": "yarn run rollup && size-limit",
     "rollup": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarikpnr/perf-analytics-module"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
