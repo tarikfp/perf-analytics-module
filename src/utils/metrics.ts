@@ -2,7 +2,7 @@ import { PerformanceResourceTimingHandler } from "../typings";
 
 // handlers
 
-const convertToSec = (ms: number): number => ms / 1000;
+export const convertToSec = (ms: number): number => ms / 1000;
 
 const parseResourceTiming = (
   resourceTiming: PerformanceResourceTiming,
@@ -21,18 +21,23 @@ const parseResourceTiming = (
 // metric utils
 
 // measure get fcp
-export const getFcp = () => {
-  if (typeof PerformanceObserver !== "undefined") {
-    new PerformanceObserver((entryList) => {
-      const foundFCP = entryList
-        .getEntriesByType("paint")
-        .find((entry) => entry.name === "first-contentful-paint");
-
-      if (foundFCP) {
-        window._perfAnalytics.fcp = convertToSec(foundFCP.startTime);
-      }
-    }).observe({ entryTypes: ["paint", "resource"] });
-  }
+export const getFcp = async (): Promise<PerformanceEntry | undefined> => {
+  return new Promise((resolve, reject) => {
+    if (typeof PerformanceObserver !== "undefined") {
+      new PerformanceObserver((entryList) => {
+        const foundFCP = entryList
+          .getEntriesByType("paint")
+          .find((entry) => entry.name === "first-contentful-paint");
+        if (foundFCP) {
+          resolve(foundFCP);
+        } else {
+          return resolve(undefined);
+        }
+      }).observe({ type: "paint", buffered: true });
+    } else {
+      reject("PerformanceObserver is unavailable");
+    }
+  });
 };
 
 // measure dom load

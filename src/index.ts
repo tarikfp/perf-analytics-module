@@ -1,5 +1,6 @@
 import { sendMetricsWithBeacon, sendMetricsWithFetch } from "./utils/api";
 import {
+  convertToSec,
   getDomLoad,
   getFcp,
   getResourceLoadTimes,
@@ -21,7 +22,7 @@ window._perfAnalytics = {
 
 // check whether performance apis are supported
 // terminate the module in case of not supported
-export const isPerformanceAPISupported = () => {
+const isPerformanceAPISupported = () => {
   if (
     !window.performance ||
     !window.performance.timing ||
@@ -34,7 +35,6 @@ export const isPerformanceAPISupported = () => {
 };
 
 function initializeObservers() {
-  getFcp();
   getDomLoad();
   getWindowLoad();
   getTTFP();
@@ -45,6 +45,9 @@ function initializeObservers() {
 (async function init() {
   // check whether performance apis are supported
   isPerformanceAPISupported();
+
+  const fcpEntry = await getFcp();
+  window._perfAnalytics.fcp = convertToSec(fcpEntry?.startTime ?? 0);
 
   // initialize metric observers on window load...
   window.addEventListener("load", () => {
