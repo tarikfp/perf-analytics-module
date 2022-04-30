@@ -42,15 +42,16 @@ function initializeObservers() {
   setUserAgent();
 }
 
-(async function init() {
+(function init() {
   // check whether performance apis are supported
   isPerformanceAPISupported();
 
-  const fcpEntry = await getFcp();
-  window._perfAnalytics.fcp = convertToSec(fcpEntry?.startTime ?? 0);
-
   // initialize metric observers on window load...
-  window.addEventListener("load", () => {
+  window.addEventListener("load", async () => {
+    const fcpEntry = await getFcp();
+
+    window._perfAnalytics.fcp = convertToSec(fcpEntry?.startTime ?? 0);
+
     initializeObservers();
     // send metric data to api
 
