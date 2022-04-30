@@ -24,8 +24,12 @@ const parseResourceTiming = (
 export const getFcp = () => {
   if (typeof PerformanceObserver !== "undefined") {
     new PerformanceObserver((entryList) => {
-      for (const entry of entryList.getEntries()) {
-        window._perfAnalytics.fcp = convertToSec(entry.startTime);
+      const foundFCP = entryList
+        .getEntriesByType("paint")
+        .find((entry) => entry.name === "first-contentful-paint");
+
+      if (foundFCP) {
+        window._perfAnalytics.fcp = convertToSec(foundFCP.startTime);
       }
     }).observe({ entryTypes: ["paint", "resource"] });
   }
