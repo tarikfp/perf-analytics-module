@@ -1,4 +1,4 @@
-import { sendMetricsWithBeacon, sendMetricsWithFetch } from "./utils/api";
+import { sendMetricsWithFetch } from "./utils/api";
 import {
   convertToSec,
   getDomLoad,
@@ -55,12 +55,16 @@ function initializeObservers() {
     initializeObservers();
     // send metric data to api
 
+    // facing CORB issue while using navigator.sendBeacon API
+    // will prefer to use fetchAPI instead
+    // @see https://medium.com/@longtermsec/chrome-just-hardened-the-navigator-beacon-api-against-cross-site-request-forgery-csrf-690239ccccf
+    return sendMetricsWithFetch(JSON.stringify(window._perfAnalytics));
     // check whether sendBeacon is available
-    if (!navigator.sendBeacon) {
+    /*   if (!navigator.sendBeacon) {
       // use fetch api
       sendMetricsWithFetch(JSON.stringify(window._perfAnalytics));
     } else {
       sendMetricsWithBeacon(JSON.stringify(window._perfAnalytics));
-    }
+    } */
   });
 })();
