@@ -78,4 +78,4 @@ export const setUserAgent = () =>
   (window._perfAnalytics.userAgent = navigator.userAgent);
 
 export const setLocationHref = () =>
-  (window._perfAnalytics.userAgent = window.location.href);
+  (window._perfAnalytics.url = window.location.href);
