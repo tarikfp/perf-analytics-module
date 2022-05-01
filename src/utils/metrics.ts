@@ -54,8 +54,8 @@ export const getWindowLoad = () =>
   ));
 
 // measure ttfp =>  https://developer.mozilla.org/en-US/docs/Glossary/time_to_first_byte
-export const getTTFP = () =>
-  (window._perfAnalytics.ttfp = convertToSec(
+export const getTTFB = () =>
+  (window._perfAnalytics.ttfb = convertToSec(
     window.performance.timing.responseStart -
       window.performance.timing.navigationStart,
   ));
@@ -76,3 +76,6 @@ export const getResourceLoadTimes = () => {
 
 export const setUserAgent = () =>
   (window._perfAnalytics.userAgent = navigator.userAgent);
+
+export const setLocationHref = () =>
+  (window._perfAnalytics.userAgent = window.location.href);

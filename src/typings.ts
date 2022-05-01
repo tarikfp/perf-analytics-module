@@ -2,7 +2,7 @@
 // they can be undefined in case browser does not support global performance api
 export interface IPerfAnalytics {
   // time to first byte
-  ttfp?: number;
+  ttfb?: number;
   // first contentful paint
   fcp?: number;
   // dom load time
@@ -16,6 +16,8 @@ export interface IPerfAnalytics {
   resources: PerformanceResourceTimingHandler[];
   // user agent
   userAgent: string | null;
+  // url of the page
+  url: string | null;
 }
 export type PerformanceResourceTimingHandler = Pick<
   PerformanceResourceTiming,

@@ -4,8 +4,9 @@ import {
   getDomLoad,
   getFcp,
   getResourceLoadTimes,
-  getTTFP,
+  getTTFB,
   getWindowLoad,
+  setLocationHref,
   setUserAgent,
 } from "./utils/metrics";
 
@@ -14,9 +15,10 @@ import {
 window._perfAnalytics = {
   domLoad: 0,
   fcp: 0,
-  ttfp: 0,
+  ttfb: 0,
   windowLoad: 0,
   userAgent: null,
+  url: null,
   resources: [],
 };
 
@@ -37,9 +39,10 @@ const isPerformanceAPISupported = () => {
 function initializeObservers() {
   getDomLoad();
   getWindowLoad();
-  getTTFP();
+  getTTFB();
   getResourceLoadTimes();
   setUserAgent();
+  setLocationHref();
 }
 
 (function init() {
