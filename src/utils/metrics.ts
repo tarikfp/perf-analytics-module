@@ -7,13 +7,21 @@ export const convertToSec = (ms: number): number => ms / 1000;
 const parseResourceTiming = (
   resourceTiming: PerformanceResourceTiming,
 ): PerformanceResourceTimingHandler => {
-  const { duration, name, initiatorType, responseEnd, startTime } =
-    resourceTiming;
+  const {
+    duration,
+    name,
+    initiatorType,
+    responseEnd,
+    startTime,
+    transferSize,
+  } = resourceTiming;
+
   return {
     duration,
     initiatorType,
     name,
     responseEnd,
+    transferSize,
     startTime,
   };
 };
